@@ -73,12 +73,8 @@ public class StockDataUtils {
         for (int i = 0; i < dataArray.length(); i++) {
             JSONArray jsonArray = dataArray.optJSONArray(i);
             tempStockData = new StockData(jsonArray.optString(0), jsonArray.optDouble(1),
-                    jsonArray.optDouble(2), jsonArray.optDouble(3), jsonArray.optDouble(4));
-            Log.d("Date",jsonArray.optString(0));
-            Log.d("Open",jsonArray.optString(1));
-            Log.d("High",jsonArray.optString(2));
-            Log.d("Low",jsonArray.optString(3));
-            Log.d("Close",jsonArray.optString(4));
+                    jsonArray.optDouble(2), jsonArray.optDouble(3), jsonArray.optDouble(4),
+                    jsonArray.optDouble(5));
 
             if (previousStockData == null || isFromSameMonth(previousStockData, tempStockData)) {
                 stockDataList.add(tempStockData);
@@ -95,12 +91,6 @@ public class StockDataUtils {
             monthlyDataList.put(month + "", stockDataList);
         }
 
-        for (Map.Entry<String, List<StockData>> entry : monthlyDataList.entrySet()){
-            for (StockData stockData : entry.getValue()) {
-                Log.d("Open",String.valueOf(stockData.getOpen()));
-                Log.d("Open",String.valueOf(stockData.getClose()));
-            }
-        }
         return monthlyDataList;
     }
 
@@ -119,20 +109,27 @@ public class StockDataUtils {
 
     public static List<MonthlyAverageData> processMonthlyData(Map<String, List<StockData>> stockDataList) {
         List<MonthlyAverageData> monthlyAverageDataList = new ArrayList<>();
+        int loserDays = 0;
+
         for (Map.Entry<String, List<StockData>> entry : stockDataList.entrySet()) {
-            Log.d("Month", String.valueOf(entry.getKey()));
             List<StockData> listOfStockData = entry.getValue();
             List<Double> monthlyOpen = new ArrayList<>();
             List<Double> monthlyClose = new ArrayList<>();
+
             for (StockData stockData : listOfStockData) {
                 monthlyOpen.add(stockData.getOpen());
                 monthlyClose.add(stockData.getClose());
+
+                if(stockData.getClose() < stockData.getOpen()){
+                    loserDays++;
+                }
             }
 
             double averageOpen = average(monthlyOpen.toArray());
             double averageClose = average(monthlyClose.toArray());
-            Log.d(String.valueOf(entry.getKey()), String.valueOf(averageOpen));
-            MonthlyAverageData monthlyAverageData = new MonthlyAverageData(entry.getKey(), averageOpen, averageClose);
+            
+            MonthlyAverageData monthlyAverageData = new MonthlyAverageData(entry.getKey(), averageOpen,
+                    averageClose, loserDays);
             monthlyAverageDataList.add(monthlyAverageData);
         }
 
@@ -144,6 +141,7 @@ public class StockDataUtils {
         for (int i = 0; i < m.length; i++) {
             sum += (double) m[i];
         }
-        return sum / m.length;
+
+        return Math.round((sum / m.length) * 100.0) / 100.0;
     }
 }

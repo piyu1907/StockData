@@ -10,13 +10,15 @@ public class StockData {
     double close;
     double high;
     double low;
+    double volume;
 
-    public StockData(String date, double open, double high, double low, double close) {
+    public StockData(String date, double open, double high, double low, double close, double volume) {
         this.date = date;
         this.open = open;
         this.high = high;
         this.low = low;
         this.close = close;
+        this.volume = volume;
     }
 
     public double getOpen() {
@@ -37,6 +39,10 @@ public class StockData {
 
     public double getLow() {
         return low;
+    }
+
+    public double getVolume() {
+        return volume;
     }
 
     @Override
