@@ -5,9 +5,11 @@ package com.priyanka.stockdata.model;
  */
 
 public class MonthlyAverageData {
-    String month;
-    double averageOpen;
-    double averageClose;
+
+    private String month;
+    private double averageOpen;
+    private double averageClose;
+    private String security;
 
     public MonthlyAverageData(String month, double averageOpen, double averageClose) {
         this.month = month;
@@ -25,6 +27,26 @@ public class MonthlyAverageData {
 
     public double getAverageClose() {
         return averageClose;
+    }
+
+    public String getSecurity() {
+        return security;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public void setAverageOpen(double averageOpen) {
+        this.averageOpen = averageOpen;
+    }
+
+    public void setAverageClose(double averageClose) {
+        this.averageClose = averageClose;
+    }
+
+    public void setSecurity(String security) {
+        this.security = security;
     }
 
     @Override

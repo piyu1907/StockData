@@ -2,6 +2,8 @@ package com.priyanka.stockdata.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.priyanka.stockdata.R;
+import com.priyanka.stockdata.adapter.StockAdapter;
 import com.priyanka.stockdata.model.MonthlyAverageData;
 import com.priyanka.stockdata.model.StockData;
 import com.priyanka.stockdata.util.StockDataUtils;
@@ -18,16 +21,16 @@ import java.util.Map;
 
 public class StockActivity extends AppCompatActivity implements StockDataCallBack {
     private EditText tickerSymbolEditText;
-    private RecyclerView sampleDataRecyclerView;
+    private RecyclerView recyclerView;
     private Button submitButton;
-    private StockDataCallBack callBack;
+    private StockAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
         tickerSymbolEditText = findViewById(R.id.editText);
-        sampleDataRecyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         submitButton = findViewById(R.id.button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +40,6 @@ public class StockActivity extends AppCompatActivity implements StockDataCallBac
                         StockActivity.this);
             }
         });
-
     }
 
     @Override
@@ -46,5 +48,10 @@ public class StockActivity extends AppCompatActivity implements StockDataCallBac
         for (MonthlyAverageData monthlyAverageData : monthlyAverageDataList) {
             Log.d("Monthly Average Data", monthlyAverageData.toString());
         }
+        adapter = new StockAdapter(monthlyAverageDataList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 }
