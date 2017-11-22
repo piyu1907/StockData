@@ -6,9 +6,10 @@ This application intends to call the QUANDL API to fetch historical stock data f
 To install the codebase :
 1) Install Android Studio/IntelliJ IDEA 
 2) Clone the repository
-3) Open the project through IDE.
-4) Create an emulator using Android AVD or connect an device to machine. 
-5) Hit run on the task bar and start the application on either emulator or physical device. 
+3) Open the project through IDE
+4) In com.priyanka.stockdata.processor.StockDataProcessor Java Class, Place QUANDL API Key in URL_QUERY before running
+5) Create an emulator using Android AVD or connect an device to machine
+6) Hit run on the task bar and start the application on either emulator or physical device
 
 In the application, following features are implemented.
 1) Tables indicating monthly average open and average close for each of the securities. 
