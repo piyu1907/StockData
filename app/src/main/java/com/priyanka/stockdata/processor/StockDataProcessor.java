@@ -41,7 +41,7 @@ public class StockDataProcessor {
     public static String URL = "\n" +
             "https://www.quandl.com/api/v3/datasets/WIKI/";
     public static String URL_QUERY =
-            "/data.json?api_key=s-GMZ_xkw6CrkGYUWs1p&start_date=2017-01-01&end_date=2017-06-30&order=asc&collapse=daily";
+            "/data.json?api_key=<INSERT_API_KEY>&start_date=2017-01-01&end_date=2017-06-30&order=asc&collapse=daily";
 
     public static String getURL(String tickerSymbol) {
         return URL + tickerSymbol + URL_QUERY;
