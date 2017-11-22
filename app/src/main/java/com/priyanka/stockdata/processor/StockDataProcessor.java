@@ -1,6 +1,7 @@
 package com.priyanka.stockdata.processor;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,6 +20,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +71,7 @@ public class StockDataProcessor {
 
     }
 
-    private static Map<String, List<Stock>> processResponse(String response) throws JSONException {
+    public static Map<String, List<Stock>> processResponse(String response) throws JSONException {
         Map<String, List<Stock>> monthlyDataList = new LinkedHashMap<>();
         List<Stock> stockList = new ArrayList<>();
         Stock tempStock, previousStock = null;
@@ -138,7 +142,7 @@ public class StockDataProcessor {
                 }
 
                 //Map to get profitable date with corresponding profit
-                profitableDates.put(stock.getDate(), Math.round((stock.getHigh() - stock.getLow()) * 100.0) / 100.0);
+                profitableDates.put(stock.getDate(), round((stock.getHigh() - stock.getLow()), 2));
                 //Map to find date with high volume data
                 volumeDates.put(stock.getDate(), stock.getVolume());
             }
@@ -167,11 +171,12 @@ public class StockDataProcessor {
 
     public static double average(Object[] m) {
         double sum = 0;
+        double average = 0;
         for (int i = 0; i < m.length; i++) {
             sum += (double) m[i];
         }
-
-        return Math.round((sum / m.length) * 100.0) / 100.0;
+        average = sum / m.length;
+        return round(average, 2);
     }
 
     public static Map.Entry<String, Double> max(Map<String, Double> profitMap) {
@@ -194,10 +199,19 @@ public class StockDataProcessor {
 
         for (Map.Entry<String, Double> volumeEntry : volumeMap.entrySet()
                 ) {
-            if (volumeEntry.getValue() - avgVolume > 0.1 * avgVolume) {
+            if (volumeEntry.getValue() - avgVolume > 1.1 * avgVolume) {
                 highVolumeList.add(volumeEntry.getKey());
             }
         }
         return highVolumeList;
     }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
 }

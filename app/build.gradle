@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -31,4 +34,6 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'joda-time:joda-time:2.9.9'
     compile 'com.github.thunder413:DateTimeUtils:1.0'
+    testCompile "org.json:json:20140107"
+
 }

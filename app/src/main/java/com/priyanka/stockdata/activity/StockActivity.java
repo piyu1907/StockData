@@ -67,6 +67,7 @@ public class StockActivity extends AppCompatActivity implements StockDataCallBac
     public void update(Map<String, List<Stock>> stockDataList, String symbol) {
         if (stockDataList != null) {
             StockSummary analysis = StockDataProcessor.processStockData(stockDataList);
+            Log.d("Security", symbol);
             for (MonthlyStockData monthlyStockData : analysis.getMonthlyStockDataList()) {
                 Log.d("Monthly Average Data", monthlyStockData.toString());
             }
