@@ -128,16 +128,18 @@ public class StockDataProcessor {
             List<Double> monthlyOpen = new ArrayList<>();
             List<Double> monthlyClose = new ArrayList<>();
 
-
             for (Stock stock : listOfStock) {
                 monthlyOpen.add(stock.getOpen());
                 monthlyClose.add(stock.getClose());
 
+                //To find number of loser days
                 if (stock.getClose() < stock.getOpen()) {
                     loserDays++;
                 }
 
+                //Map to get profitable date with corresponding profit
                 profitableDates.put(stock.getDate(), Math.round((stock.getHigh() - stock.getLow()) * 100.0) / 100.0);
+                //Map to find date with high volume data
                 volumeDates.put(stock.getDate(), stock.getVolume());
             }
 
@@ -151,6 +153,7 @@ public class StockDataProcessor {
 
         stockSummary.setMonthlyStockDataList(monthlyStockDataList);
         stockSummary.setLoserDaysCounter(loserDays);
+
         Map.Entry<String, Double> profitEntry = max(profitableDates);
         stockSummary.setMaxProfit(profitEntry.getValue());
         stockSummary.setMaxProfitDate(profitEntry.getKey());
