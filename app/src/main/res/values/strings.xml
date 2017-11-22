@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StockData</string>
+    <string name="cof">COF</string>
+    <string name="googl">GOOGL</string>
+    <string name="msft">MSFT</string>
+    <string name="max_daily_profit">The max daily profit for %1$s is $ %2$s per share on %3$s.</string>
+    <string name="busy_day">The number of busy days for %1$s is  %2$s.</string>
+    <string name="biggest_loser">The number of loss making days for %1$s is  %2$s.</string>
 </resources>

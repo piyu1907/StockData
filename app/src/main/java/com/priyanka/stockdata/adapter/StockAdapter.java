@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.priyanka.stockdata.R;
-import com.priyanka.stockdata.model.MonthlyAverageData;
+import com.priyanka.stockdata.model.MonthlyStockData;
 
 import java.util.List;
 
@@ -16,10 +16,11 @@ import java.util.List;
  */
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> {
-    List<MonthlyAverageData> monthlyAverageDataList;
+    List<MonthlyStockData> monthlyStockDataList;
 
-    public StockAdapter(List<MonthlyAverageData> monthlyAverageDataList) {
-        this.monthlyAverageDataList = monthlyAverageDataList;
+    public StockAdapter(List<MonthlyStockData> monthlyStockDataList) {
+        this.monthlyStockDataList = monthlyStockDataList;
+        this.monthlyStockDataList.add(0, new MonthlyStockData("Month", -1, -1));
     }
 
     @Override
@@ -31,15 +32,21 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(StockAdapter.ViewHolder holder, int position) {
-        MonthlyAverageData monthlyAverageData = monthlyAverageDataList.get(position);
-        holder.month.setText(monthlyAverageData.getMonth());
-        holder.averageHigh.setText(monthlyAverageData.getAverageOpen() + "");
-        holder.averageLow.setText(monthlyAverageData.getAverageClose() + "");
+        MonthlyStockData monthlyStockData = monthlyStockDataList.get(position);
+        if (position == 0) {
+            holder.month.setText(monthlyStockData.getMonth());
+            holder.averageHigh.setText("Average Open");
+            holder.averageLow.setText("Average Close");
+        } else {
+            holder.month.setText(monthlyStockData.getMonth());
+            holder.averageHigh.setText(monthlyStockData.getAverageOpen() + "");
+            holder.averageLow.setText(monthlyStockData.getAverageClose() + "");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return monthlyAverageDataList.size();
+        return monthlyStockDataList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

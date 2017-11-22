@@ -4,7 +4,7 @@ package com.priyanka.stockdata.model;
  * Created by priyanka on 11/21/17.
  */
 
-public class StockData {
+public class Stock {
     String date;
     double open;
     double close;
@@ -12,7 +12,7 @@ public class StockData {
     double low;
     double volume;
 
-    public StockData(String date, double open, double high, double low, double close, double volume) {
+    public Stock(String date, double open, double high, double low, double close, double volume) {
         this.date = date;
         this.open = open;
         this.high = high;
