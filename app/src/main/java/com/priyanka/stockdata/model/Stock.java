@@ -1,6 +1,8 @@
 package com.priyanka.stockdata.model;
 
 /**
+ * Model class to store the  daily stock data received from the API.
+ *
  * Created by priyanka on 11/21/17.
  */
 

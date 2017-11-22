@@ -1,9 +1,8 @@
 package com.priyanka.stockdata.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
+ * Model class to store monthly average open and close prices.
  * Created by priyanka on 11/21/17.
  */
 

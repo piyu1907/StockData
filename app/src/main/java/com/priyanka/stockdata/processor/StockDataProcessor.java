@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Stock Data Processor to analyse the performance of the securities.
+ *
  * Created by priyanka on 11/21/17.
  */
 

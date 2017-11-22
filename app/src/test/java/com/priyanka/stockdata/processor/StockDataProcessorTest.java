@@ -9,6 +9,9 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Test case to validate the transformation of API response to its corresponding model objects.
+ */
 public class StockDataProcessorTest {
 
     private static final double DELTA = 1e-15;

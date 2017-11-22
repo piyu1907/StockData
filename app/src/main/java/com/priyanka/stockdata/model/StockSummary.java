@@ -3,6 +3,8 @@ package com.priyanka.stockdata.model;
 import java.util.List;
 
 /**
+ * Model class to store stock performance summary for respective security
+ * after processing the data obtained from API.
  * Created by priyanka on 11/21/17.
  */
 

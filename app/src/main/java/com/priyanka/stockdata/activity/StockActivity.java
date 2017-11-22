@@ -20,6 +20,10 @@ import com.priyanka.stockdata.processor.StockDataProcessor;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Activity to display the security performance based on the data obtained from API.
+ */
+
 public class StockActivity extends AppCompatActivity implements StockDataCallBack {
     private RecyclerView cofRecyclerView, googlRecyclerView, msftRecyclerView;
     private TextView cofTextView, googlTextView, msftTextView, cofiMaxProfitTextView,
